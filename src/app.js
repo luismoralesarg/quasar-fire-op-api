@@ -9,7 +9,11 @@ app.use(express.json());
 
 const Router = require('./routes');
 
-app.use('/topsecret', Router);
+// Middleware
+
+const Logging = require('./config/logging')
+
+app.use('/topsecret', Logging, Router);
 
 app.listen(PORT, () => {
     console.log(`Decoding on: ${PORT}`);

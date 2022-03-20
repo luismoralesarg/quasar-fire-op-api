@@ -18,7 +18,7 @@
     const distanceF = skywalkerR ** 2 - satoR ** 2 - skywalkerX ** 2 + satoX ** 2 - skywalkerY ** 2 + satoY ** 2
     const posX = (distanceC * distanceE - distanceF * distanceB) / (distanceE * distanceA - distanceB * distanceD)
     const posY = (distanceC * distanceD - distanceA * distanceF) / (distanceB * distanceD - distanceA * distanceE)
-    return { X: posX, Y: posY };
+    return { x: posX, y: posY };
   };
 
   module.exports = getLocation;

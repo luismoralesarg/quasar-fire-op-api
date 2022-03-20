@@ -1,5 +1,8 @@
 const logger = (req, res, next) => {
-    console.log(req.method + ' ' + req.url);
+    const today = new Date();
+    const timestamp = today.toISOString().substring(0, 19).replace('T',' ');
+    console.log(timestamp + ' ' + req.method + ' ' + req.baseUrl);
+    next();
 };
 
-module.exports = { logger };
+module.exports = logger;
