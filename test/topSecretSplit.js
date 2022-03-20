@@ -12,13 +12,29 @@ const testcase = {
               "message": ["este", "", "", "mensaje", ""]
 };
 describe('cargar un nuevo satellite: ', () => {
-  it('debe tener la propiedad distance y message', (done) => {
+  it('debe tener la propiedad posición y mensaje', (done) => {
     chai.request(url)
       .post('/topsecretSplit/:satellite')
       .send(testcase)
       .end((err, res) =>{
         expect(res).to.have.status(200)
+        expect(res.body).to.have.own.property('pos');
+        expect(res.body).to.have.own.property('msg');
         done();
       });
   });
-})
+});
+
+describe('obtener todos los satellites y calcular: ', () => {
+  it('debe tener la propiedad posición y mensaje', (done) => {
+    chai.request(url)
+      .get('/topsecretSplit/')
+      .send()
+      .end((err, res) =>{
+        expect(res).to.have.status(200)
+        expect(res.body).to.have.own.property('pos');
+        expect(res.body).to.have.own.property('msg');
+        done();
+      });
+  });
+});
