@@ -18,8 +18,7 @@ describe('cargar un nuevo satellite: ', () => {
       .send(testcase)
       .end((err, res) =>{
         expect(res).to.have.status(200)
-        expect(res.body).to.have.own.property('pos');
-        expect(res.body).to.have.own.property('msg');
+        expect(res.body).to.be.true;
         done();
       });
   });
