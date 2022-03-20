@@ -6,7 +6,7 @@ const getMessage = async (messages) => {
   
     let messageDecoded = '';
     for (let i = 0; i < kenobi.length && i < skywalker.length && i < sato.length; i++) {
-      messageDecoded += kenobi[i] ? `${kenobi[i]} ` : (skywalker[i] ? `${skywalker[i]} ` : (sato[i] ? `${sato[i]} ` : (function(){throw { 'message': 'This message is missing a part.' }}())));
+      messageDecoded += kenobi[i] ? `${kenobi[i]} ` : (skywalker[i] ? `${skywalker[i]} ` : (sato[i] ? `${sato[i]} ` : (function(){ throw { 'message': 'El mensaje no se puede decodificar' }}())));
     }
     
     return messageDecoded.trim();
