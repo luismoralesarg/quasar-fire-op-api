@@ -4,8 +4,7 @@ const { addSignalPoint, getSignalPoints, resetSignalPoints } = require('../contr
 RouterSplit.post('/:sattelite', async (req, res) => {
     try {
         const r = await addSignalPoint({ name: req.params.sattelite, distance: req.body.distance, message: req.body.message });
-        const signals = await getSignalPoints();
-        res.json((r) ? signals : 'Error');
+        res.json(r);
     } catch (e) {
         res.status(500).json(e);
     }
