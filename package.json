@@ -29,6 +29,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.3",
+    "level": "^7.0.1",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
