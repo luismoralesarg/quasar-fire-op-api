@@ -12,8 +12,8 @@ const processSignal = async (satellites) => {
         const pos = await getLocation(dists);
         const msg = await getMessage(msgs);
         return { pos, msg };   
-    } catch (e) {
-        throw e;
+    } catch (err) {
+        return 'El mensaje no puede ser decodificado'
     }
 };
 
@@ -31,8 +31,8 @@ const getSignalPoints = async () => {
     try {
         const satellites = await get();
         return await processSignal(satellites);
-    } catch (e) {
-        throw e;
+    } catch (err) {
+        throw err;
     }
 }
 
