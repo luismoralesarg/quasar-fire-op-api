@@ -1,8 +1,7 @@
-const { getLocation, getMessage } = require('../services');
+const { getLocation, getMessage, add, get, reset } = require('../services');
 
 const processSignal = async (satellites) => {
     try {
-        
         let dists = [];
         let msgs = [];
         for (let i = 0; i < satellites.length; i++) {
@@ -12,12 +11,39 @@ const processSignal = async (satellites) => {
         }
         const pos = await getLocation(dists);
         const msg = await getMessage(msgs);
-        
         return { pos, msg };   
-
     } catch (e) {
-        throw e;        
+        throw e;
     }
 };
 
-module.exports = processSignal;
+const addSignalPoint = async (satellite) => {
+    try {
+        await add(satellite);
+        return true;
+    } catch (e) {
+        throw e;
+    }
+    
+};
+
+const getSignalPoints = async () => {
+    try {
+        const satellites = await get();
+        return await processSignal(satellites);
+    } catch (e) {
+        throw e;
+    }
+}
+
+const resetSignalPoints = async () => {
+    try {
+        await reset();
+        return true;
+    } catch (e) {
+        throw e;
+    }
+
+}
+
+module.exports = { processSignal, addSignalPoint, getSignalPoints, resetSignalPoints };
