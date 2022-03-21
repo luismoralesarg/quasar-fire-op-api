@@ -1,12 +1,150 @@
-openapi: '3.0.2'
+openapi: 3.0.0
 info:
-  title: API Title
-  version: '1.0'
+  title: Quasar Fire Op API REST
+  version: 1.0.0
 servers:
-  - url: https://api.server.test/v1
+  - url: https://quasar.hostify.com.ar/
+    description: Producción
 paths:
-  /test:
-    get:
+  /topsecret:
+    post:
+      summary: calcula la posicion del carguero y el mensaje
+      operationId: topsecret
+      description: Obtiene el mensaje decodificado y las coordenadas del emisor del mensaje
       responses:
         '200':
-          description: OK
+          description: calculo realizado con exito, mensaje decodificado
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '500':
+          description: error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sattelites'
+        description: Satelites con sus distancias y mensajes
+  /topsecret_split:
+    get:
+      summary: calcula la posicion del carguero y el mensaje
+      operationId: topsecret_split
+      description: Obtiene el mensaje decodificado y las coordenadas del emisor del mensaje
+      responses:
+        '200':
+          description: calculo realizado con exito, mensaje decodificado
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+        '500':
+          description: error
+    delete:
+      summary: elimina los satelites cargados
+      operationId: topsecret_split_delete
+      description: Resetea todos los satelites
+      responses:
+        '200':
+          description: satelites eliminados con exito
+        '500':
+          description: error al borrar
+  /topsecret_split/{name}:
+    post:
+      summary: agrega un satelite
+      operationId: topsecret_split_post
+      description: Permite agregar un nuevo conjunto de datos
+      responses:
+        '200':
+          description: calculo realizado con exito, mensaje decodificado
+          content: 
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Response'
+      parameters:
+        - in: path
+          name: "name"
+          example: kenobi
+          required: true
+          description: Nombre del satelite
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SatteliteSplit'
+        description: Distancia y mensaje del satelite
+    
+components:
+  schemas:
+    Sattelites:
+      type: object
+      properties:
+        sattelites:
+          type: array
+          items:
+            type: object
+            required:
+              - name
+              - distance
+              - message
+            properties:
+              name:
+                type: string
+                description: "Nombre del satellite"
+                example: kenobi
+              distance:
+                type: number
+                example: 100.5
+                description: "Distancia del satellite"
+              message:
+                type: array
+                items:
+                  type: string
+                example: ["este", "", "un", "mensaje", ""]
+                maxItems: 6
+                description: "Mensaje recibido"
+          example:
+            - name: kenobi
+              distance: 100.5
+              message: ["este", "", "un", "mensaje", ""]
+            - name: skywalker
+              distance: 150.5
+              message: ["", "es", "un", "mensaje", ""]
+            - name: sato
+              distance: 150.5
+              message: ["", "es", "un", "", "screto"]
+    SatteliteSplit:
+      type: object
+      required:
+        - distance
+        - message
+      properties:
+        distance:
+          type: number
+          example: 100.5
+        message:
+          type: array
+          items:
+            type: string
+          example: ["este", "", "un", "mensaje", ""]
+          maxItems: 6
+    Response:
+      type: object
+      properties:
+        pos:
+          type: object
+          properties:
+            x:
+              type: number
+              example: -454.64
+              description: "Posicion en el eje X"
+            y:
+              type: number
+              example: 1520.67
+              description: "Posicion en el eje Y"
+        msg:
+          type: string
+          example: "este es un mensaje secreto"
+          description: "Mensaje decodificado"
