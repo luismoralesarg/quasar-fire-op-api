@@ -1,5 +1,5 @@
 const Router = require('express').Router();
-const processSignal = require('../controllers');
+const { processSignal } = require('../controllers');
 
 Router.post('/', async (req, res) => {
     try {

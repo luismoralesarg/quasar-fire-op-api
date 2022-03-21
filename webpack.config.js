@@ -1,10 +1,11 @@
 const path = require('path');
 
 module.exports = {
-  entry: './app.js',
+  entry: './src/app.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'api.bundle.js'
   },
-  target: 'node'
+  target: 'node',
+  mode: 'production'
 };
