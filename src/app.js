@@ -13,7 +13,7 @@ app.use(express.json());
 const Logging = require('./config/logging')
 
 app.use('/topsecret', Logging, Router);
-app.use('/topsecretSplit', Logging, RouterSplit);
+app.use('/topsecret_split', Logging, RouterSplit);
 
 database(app);
 
