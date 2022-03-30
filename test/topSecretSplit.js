@@ -14,7 +14,7 @@ const testcase = {
 describe('cargar un nuevo satellite: ', () => {
   it('debe tener la propiedad posición y mensaje', (done) => {
     chai.request(url)
-      .post('/topsecretSplit/:satellite')
+      .post('/topsecret_split/:satellite')
       .send(testcase)
       .end((err, res) =>{
         expect(res).to.have.status(200)
@@ -27,7 +27,7 @@ describe('cargar un nuevo satellite: ', () => {
 describe('obtener todos los satellites y calcular: ', () => {
   it('debe tener la propiedad posición y mensaje', (done) => {
     chai.request(url)
-      .get('/topsecretSplit/')
+      .get('/topsecret_split/')
       .send()
       .end((err, res) =>{
         expect(res).to.have.status(200)
